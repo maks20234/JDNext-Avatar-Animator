@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#11131a">
-  <title>Just Dance AvatarAnimator</title>
+  <title>Animator — 2D Motion Studio</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#" aria-label="Just Dance AvatarAnimator home">
-      <span class="brand-mark">JD</span>
-      <span><b>Just Dance</b><small>AVATAR ANIMATOR</small></span>
+      <span class="brand-mark">A</span>
+      <span><b>Animator</b><small>2D MOTION STUDIO</small></span>
     </a>
     <div class="project-name"><span class="status-dot"></span><input id="projectName" value="Untitled animation" aria-label="Project name"></div>
     <div class="top-actions">
@@ -26,7 +26,7 @@
 
   <main class="workspace">
     <aside class="left-panel panel">
-      <div class="panel-heading"><span>TOOLS</span><span class="muted">EDITOR</span></div>
+      <div class="panel-heading"><span>Workspace</span><span class="muted">TOOLS</span></div>
       <div class="tool-grid" id="toolGrid">
         <button class="tool active" data-tool="select"><img src="assets/icons/select.svg" alt=""><small>Select</small></button>
         <button class="tool" data-tool="bone"><img src="assets/icons/bone.svg" alt=""><small>Bone</small></button>
@@ -36,19 +36,18 @@
         <button class="tool" data-tool="hand"><img src="assets/icons/hand.svg" alt=""><small>Pan</small></button>
       </div>
       <div class="section">
-        <div class="section-title">ASSETS <button class="mini" id="addImageBtn">＋ Import</button></div>
+        <div class="section-title">Artwork <button class="mini" id="addImageBtn">Import</button></div>
         <input id="imageInput" type="file" accept="image/*" hidden>
-        <div class="asset-card" id="assetCard">
-          <div class="asset-thumb"><span>✦</span></div>
-          <div><b id="assetName">Sample character</b><small>Canvas layer</small></div>
-          <button class="dots" title="Asset options">···</button>
+        <div class="asset-card hidden" id="assetCard">
+          <div class="asset-thumb"><span>IMG</span></div>
+          <div><b id="assetName">No artwork</b><small>Image layer</small></div>
         </div>
-        <p class="hint">Import a PNG, JPG or WebP to start animating your own artwork.</p>
+        <p class="hint">Bring in an image to start building your animation.</p>
       </div>
       <div class="section">
-        <div class="section-title">SCENE <button class="mini" id="addLayerBtn">＋ Layer</button></div>
-        <div class="layer-row selected"><span class="eye">◉</span><span class="layer-icon">▧</span><span>Character</span><span class="layer-lock">◇</span></div>
-        <div class="layer-row"><span class="eye">◉</span><span class="layer-icon">⌁</span><span>Rig / Bones</span><span class="layer-lock">◇</span></div>
+        <div class="section-title">Layers <button class="mini" id="addLayerBtn">Add layer</button></div>
+        <div class="layer-row selected"><span class="layer-icon">Image</span><span>Character</span></div>
+        <div class="layer-row"><span class="layer-icon">Rig</span><span>Bones</span></div>
       </div>
       <div class="left-footer"><span class="online-dot"></span> All changes are local</div>
     </aside>
@@ -65,8 +64,15 @@
       <div class="stage-wrap" id="stageWrap">
         <div class="stage-grid"></div>
         <canvas id="stage" width="900" height="560"></canvas>
-        <div class="stage-tip" id="stageTip">Import artwork or use the sample character</div>
-        <div class="stage-corner">CANVAS · 900 × 560</div>
+        <div class="welcome" id="welcome">
+          <div class="welcome-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 9v30M12 24h24M36 9v30"/><circle cx="12" cy="9" r="3"/><circle cx="36" cy="39" r="3"/></svg></div>
+          <p class="eyebrow">YOUR CANVAS IS READY</p>
+          <h1>Start with your artwork</h1>
+          <p class="welcome-copy">Import an image and bring it to life with motion, keyframes and a custom rig.</p>
+          <button class="welcome-button" id="welcomeImport">Choose an image <span>↗</span></button>
+          <span class="file-note">PNG, JPG or WebP · Your files stay on this device</span>
+        </div>
+        <div class="stage-corner">900 × 560</div>
       </div>
       <div class="playback-bar">
         <div class="play-controls">
@@ -83,48 +89,48 @@
     <aside class="right-panel panel">
       <div class="right-tabs"><button class="tab active" data-tab="properties">Properties</button><button class="tab" data-tab="rig">Rig</button><button class="tab" data-tab="effects">Effects</button></div>
       <div id="propertiesTab" class="tab-content">
-        <div class="section-title">TRANSFORM <span class="muted">LAYER</span></div>
+        <div class="section-title">Transform <span class="muted">SELECTED LAYER</span></div>
         <div class="property-grid">
           <label>X <input id="posX" type="number" value="450"></label><label>Y <input id="posY" type="number" value="280"></label>
           <label>Scale X <input id="scaleX" type="number" value="100"></label><label>Scale Y <input id="scaleY" type="number" value="100"></label>
           <label>Rotation <input id="rotation" type="number" value="0"></label><label>Opacity <input id="opacity" type="number" value="100" min="0" max="100"></label>
         </div>
-        <button class="outline full" id="keyTransform">＋ Add transform keyframe</button>
+        <button class="outline full" id="keyTransform">Add transform keyframe</button>
         <div class="divider"></div>
-        <div class="section-title">ANCHOR POINT</div>
+        <div class="section-title">Anchor point</div>
         <div class="property-grid"><label>Anchor X <input id="anchorX" type="number" value="0"></label><label>Anchor Y <input id="anchorY" type="number" value="0"></label></div>
         <p class="hint">Choose Anchor tool, then click on the artwork to move its pivot.</p>
         <div class="divider"></div>
-        <div class="section-title">MASK / PEN TOOL</div>
+        <div class="section-title">Mask</div>
         <p class="hint">Click around an object to create a closed polygon. Double-click or press Enter to close it.</p>
         <div class="button-row"><button class="outline" id="closeMask">Close mask</button><button class="outline" id="clearMask">Clear</button></div>
         <div class="divider"></div>
-        <div class="section-title">KEYFRAME INTERPOLATION</div>
+        <div class="section-title">Interpolation</div>
         <select id="easing" class="wide-select"><option value="ease">Smooth (Ease in-out)</option><option value="linear">Linear</option><option value="easeIn">Ease in</option><option value="easeOut">Ease out</option><option value="overshoot">Overshoot</option></select>
       </div>
 
       <div id="rigTab" class="tab-content hidden">
-        <div class="section-title">SKELETON <button class="mini" id="clearBones">Clear</button></div>
+        <div class="section-title">Skeleton <button class="mini" id="clearBones">Clear</button></div>
         <p class="hint">Choose Bone, click a start point and an end point. Connect bones by starting at an existing joint.</p>
         <div id="boneList" class="list-box"><div class="empty-state">No bones yet. Create your first bone on the canvas.</div></div>
         <div class="divider"></div>
-        <div class="section-title">SMART BONE / CHAIN</div>
+        <div class="section-title">Bone chains</div>
         <label class="stack-label">Selected chain <select id="chainSelect" class="wide-select"><option value="">No chain</option></select></label>
         <label class="stack-label">Follow-through <input id="follow" type="range" min="0" max="100" value="55"><small id="followVal">55%</small></label>
         <label class="stack-label">Motion speed <input id="chainSpeed" type="range" min="10" max="200" value="100"><small id="speedVal">1.00×</small></label>
         <label class="stack-label">Duration <input id="chainDuration" type="range" min="5" max="100" value="40"><small id="durationVal">40 frames</small></label>
-        <button class="outline full" id="makeChain">＋ Create sequential chain</button>
+        <button class="outline full" id="makeChain">Create sequential chain</button>
         <p class="hint">Sequential chains are useful for tails, hair, fabric and linked accessories.</p>
       </div>
 
       <div id="effectsTab" class="tab-content hidden">
-        <div class="section-title">TURBULENCE</div>
+        <div class="section-title">Turbulence</div>
         <label class="stack-label">Amount <input id="turbAmount" type="range" min="0" max="40" value="0"><small id="turbVal">0</small></label>
         <label class="stack-label">Size <input id="turbSize" type="range" min="8" max="160" value="55"><small id="turbSizeVal">55</small></label>
         <label class="stack-label">Speed <input id="turbSpeed" type="range" min="0" max="100" value="35"><small id="turbSpeedVal">35</small></label>
-        <button class="outline full" id="keyEffect">＋ Add effect keyframe</button>
+        <button class="outline full" id="keyEffect">Add effect keyframe</button>
         <div class="divider"></div>
-        <div class="section-title">DEFORMATION</div>
+        <div class="section-title">Viewport</div>
         <p class="hint">Turbulence is previewed as a live canvas displacement effect. Animate its amount with effect keyframes.</p>
         <label class="check-row"><input type="checkbox" id="showBones" checked> Show bones</label>
         <label class="check-row"><input type="checkbox" id="showMask" checked> Show mask outline</label>
@@ -134,16 +140,16 @@
 
   <section class="timeline panel">
     <div class="timeline-head">
-      <div><b>Timeline</b><span class="muted"> · Animation</span></div>
-      <div class="timeline-tools"><button class="mini" id="addKey">＋ Keyframe</button><button class="mini" id="addTrack">＋ Track</button><label>Duration <input id="durationInput" type="number" value="120" min="12" max="1200"> f</label></div>
+      <div><b>Timeline</b><span class="muted"> / Animation</span></div>
+      <div class="timeline-tools"><button class="mini" id="addKey">Add keyframe</button><button class="mini" id="addTrack">Tracks</button><label>Duration <input id="durationInput" type="number" value="120" min="12" max="1200"> f</label></div>
     </div>
     <div class="timeline-body">
       <div class="track-labels">
         <div class="ruler-label">TRACKS</div>
         <div class="track-label">Character <span>◆</span></div>
-        <div class="track-label">Transform <span>◇</span></div>
-        <div class="track-label">Effects <span>◇</span></div>
-        <div class="track-label">Rig / Bones <span>⌁</span></div>
+        <div class="track-label">Transform</div>
+        <div class="track-label">Effects</div>
+        <div class="track-label">Rig / Bones</div>
       </div>
       <div class="timeline-scroll" id="timelineScroll">
         <div class="ruler" id="ruler"></div>
