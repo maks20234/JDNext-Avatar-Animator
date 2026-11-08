@@ -56,3 +56,72 @@ input:focus,select:focus{border-color:#d45b9c!important;outline:none;box-shadow:
 .export-menu{background:#1b1c22;border:1px solid #393b44;box-shadow:0 18px 55px #000a;border-radius:13px}
 .export-menu button:hover{background:#292b32}
 @media(max-width:1000px){.workspace{grid-template-columns:190px minmax(300px,1fr)}.right-panel{display:none}}
+
+/* v3.1 studio refinement */
+:root{--bg:#0c0d10;--surface:#141519;--surface-2:#1b1d22;--surface-3:#24262d;--line:#303239;--text:#f2f2f4;--muted:#9699a3;--subtle:#696d77;--accent:#f3f3f5;--accent-ink:#17181c;--pink:#e34c9b;--blue:#9aa7ff;--radius:15px}
+body{background:#0c0d10;font-family:Inter,"DM Sans",sans-serif}
+.topbar{height:58px;background:rgba(20,21,25,.94);border-bottom:1px solid #303137;padding:0 20px;gap:24px;backdrop-filter:blur(18px)}
+.brand{min-width:205px}.brand-wordmark b{font:750 16px Manrope,sans-serif;letter-spacing:-.65px;color:#f1f1f3}
+.brand-mark{display:none}.brand small{display:none}
+.quiet,.primary,.outline{border-radius:10px;background:linear-gradient(180deg,#24252b,#191a1f);border:1px solid #383941;color:#e3e3e8;padding:8px 12px}
+.primary{background:#f0f0f2;color:#17181b;border-color:#f0f0f2}
+.workspace{height:calc(100vh - 274px);min-height:380px;grid-template-columns:220px minmax(360px,1fr) 270px;gap:1px;background:#303137}
+.panel{background:#141519}.left-panel,.right-panel{scrollbar-color:#3c3e46 transparent}
+.panel-heading{height:43px;padding:14px 15px 8px;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.tool-grid{padding:8px 10px 13px;gap:5px}
+.tool{height:57px;border-radius:11px;color:#a7a8b0;gap:6px}
+.tool.active{background:#292a30;border-color:#54555e;color:#fff;box-shadow:0 0 0 1px #ffffff08 inset}
+.tool img{filter:grayscale(1);opacity:.8}.tool.active img{filter:brightness(0) invert(1)}
+.tool-glyph{font-size:20px;line-height:19px}
+.section{padding:13px 13px;border-top-color:#292a30}
+.section-title{font-size:10px;letter-spacing:.55px;text-transform:uppercase;color:#dfe0e5}
+.hint{font-size:10px;color:#858892;line-height:1.55}
+.mini{color:#e7a0ca}.mini:hover{background:#32232e}
+.asset-card{background:#1c1d22;border:1px solid #34353c;border-radius:11px}
+.layer-row{height:36px;border-radius:9px}.layer-row.selected{background:#292a30}
+.center{background:#101115}
+.canvas-toolbar{height:48px;padding:0 14px;border-bottom:1px solid #2d2e34}
+.tool-context b{font-size:11px}.tool-context span{font-size:9px}
+.canvas-actions{gap:9px}
+.icon-btn{width:27px;height:27px;border-radius:8px;font-size:16px;color:#aeb0b9}
+.icon-btn:hover{background:#292a30;color:#fff}
+.toolbar-divider{height:19px;border-left:1px solid #393a41}
+.zoom-label{min-width:48px;height:29px;padding:0 10px;border:1px solid #36373e;border-radius:10px;background:#17181d;color:#d9d9de;font:500 11px 'IBM Plex Mono';box-shadow:0 2px 8px #0005}
+.zoom-label:hover{color:#fff;border-color:#b44a85;box-shadow:0 0 0 1px #d64b9a55,0 0 14px #d64b9a22}
+.stage-wrap{background-color:#101115;background-image:radial-gradient(#303139 .65px,transparent .65px);background-size:19px 19px}
+.stage-grid{border:1px solid #41424a;border-radius:9px;box-shadow:0 18px 60px #0008}
+#stage{border-radius:9px}
+.welcome{border:1px solid #41424a;border-radius:17px;background:rgba(25,26,31,.97)}
+.welcome-mark{background:#303139;border-radius:14px}.welcome-mark svg{stroke:#f0f0f2}
+.eyebrow{color:#e5a0c6}
+.welcome-button{background:#f0f0f2;color:#17181b;border-radius:10px}
+.playback-bar{height:46px;background:#141519;border-top-color:#303137}
+.play-button{background:#f1f1f3;color:#17181b}
+.right-tabs{height:43px}.tab{font-size:10px}.tab.active{color:#f3f3f5;border-color:#df6cae}
+.property-grid input,.wide-select,.control-label input{background:#1b1c21;border:1px solid #383941;border-radius:8px;color:#ececf0}
+.outline.full{width:100%;margin-top:10px}
+.timeline{height:216px;background:#141519;border-top:1px solid #303137}
+.timeline-head{height:43px;padding:0 16px;border-bottom:1px solid #303137}
+.timeline-head b{font-size:11px}.timeline-tools{gap:9px}.timeline-tools label{font-size:10px;color:#a5a6ae}
+.timeline-tools input{width:48px;background:#1d1e23;border:1px solid #393a42;border-radius:7px;color:#eee;padding:4px}
+.timeline-body{height:139px}.track-labels{width:132px;background:#17181d;border-right:1px solid #303137}
+.ruler-label,.track-label{height:27px;font-size:9px;color:#9b9da6;border-bottom:1px solid #292a30}
+.track-label{height:27px}.timeline-scroll{background:#17181d}
+.ruler{height:27px;border-bottom:1px solid #303137}
+.ruler-mark{font:9px 'IBM Plex Mono';color:#858791}
+.track-lane{height:27px;border-bottom:1px solid #282930}
+.key{width:9px;height:9px;background:#e76cab;border:1px solid #ffb8da;transform:rotate(45deg);border-radius:2px;top:8px;cursor:grab;box-shadow:0 0 9px #e76cab55}
+.key.selected{background:#fff;border-color:#fff;box-shadow:0 0 0 4px #df65a633,0 0 12px #fff8}
+.playhead{border-color:#e66aaa}
+#frameScrubber{height:139px}
+.timeline-foot{height:32px;padding:0 16px;color:#92949d;font-size:9px}
+.bone-item{width:100%;display:flex;justify-content:space-between;padding:8px 9px;border:1px solid #303139;border-radius:8px;background:#1a1b20;color:#d9d9df;margin-bottom:5px;font-size:10px;text-align:left}
+.bone-item.selected{border-color:#a54d80;background:#29202a}
+.control-label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10px;color:#b9bac2;margin:8px 0}
+.control-label input{width:112px;accent-color:#dc69a9}
+.smart-group{padding:8px;margin:5px 0;border:1px solid #34353c;border-radius:9px;background:#1a1b20}
+.smart-group b,.smart-group small{display:block;font-size:10px}.smart-group small{color:#8e9099;margin:3px 0 6px}
+.smart-group div{display:flex;gap:5px}.smart-group button{border:1px solid #3a3b43;border-radius:6px;padding:3px 8px;color:#ddd;background:#24252b}
+.empty-state{font-size:10px;color:#83858f;padding:10px;line-height:1.5}
+.toast{background:#24252b;border:1px solid #4a4b54;border-radius:10px}
+@media(max-width:1050px){.workspace{grid-template-columns:185px minmax(320px,1fr) 235px}.brand{min-width:170px}.brand-wordmark b{font-size:14px}}

@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#11131a">
-  <title>Animator — 2D Motion Studio</title>
+  <title>JdAvatarAnimator — 2D Motion Studio</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#" aria-label="Just Dance AvatarAnimator home">
-      <span class="brand-mark">A</span>
-      <span><b>Animator</b><small>2D MOTION STUDIO</small></span>
+      <span class="brand-wordmark"><b>JdAvatarAnimator</b></span>
     </a>
     <div class="project-name"><span class="status-dot"></span><input id="projectName" value="Untitled animation" aria-label="Project name"></div>
     <div class="top-actions">
@@ -32,6 +31,7 @@
         <button class="tool" data-tool="bone"><img src="assets/icons/bone.svg" alt=""><small>Bone</small></button>
         <button class="tool" data-tool="pen"><img src="assets/icons/pen.svg" alt=""><small>Pen mask</small></button>
         <button class="tool" data-tool="anchor"><img src="assets/icons/anchor.svg" alt=""><small>Anchor</small></button>
+        <button class="tool" data-tool="weight"><span class="tool-glyph">◉</span><small>Weight paint</small></button>
         <button class="tool" data-tool="point"><img src="assets/icons/pin.svg" alt=""><small>Pin</small></button>
         <button class="tool" data-tool="hand"><img src="assets/icons/hand.svg" alt=""><small>Pan</small></button>
       </div>
@@ -107,7 +107,7 @@
         <p class="hint">Choose Anchor tool, then click on the artwork to move its pivot.</p>
         <div class="divider"></div>
         <div class="section-title">Mask</div>
-        <p class="hint">Click around the selected image to create a clipping mask. Press Enter or Close mask to apply. Each image has its own independent mask.</p>
+        <p class="hint">Click to place vertices. Click the first point to snap-close and apply instantly, or press Enter to close exactly. Each image has its own mask.</p>
         <div class="button-row"><button class="outline" id="closeMask">Close mask</button><button class="outline" id="clearMask">Clear</button></div>
         <div class="divider"></div>
         <div class="section-title">Interpolation</div>
@@ -119,6 +119,19 @@
         <p class="hint">Choose Bone, click a start point and an end point. Start on an existing joint to connect segments. Drag any joint with Select to deform the image mesh. Add a pose keyframe to animate the rig.</p>
         <div id="boneList" class="list-box"><div class="empty-state">No bones yet. Create your first bone on the canvas.</div></div>
         <div class="divider"></div>
+        <div class="section-title">Weight paint</div>
+        <label class="control-label">Brush size <input id="weightSize" type="range" min="8" max="120" value="42"></label>
+        <label class="control-label">Weight strength <input id="weightStrength" type="range" min="1" max="100" value="35"></label>
+        <div class="button-row"><button class="outline" id="autoWeights">Auto weights</button><button class="outline" id="clearWeights">Reset</button></div>
+        <p class="hint">Select a bone, then paint its influence on the artwork. Hold Alt to erase influence.</p>
+        <div class="divider"></div>
+        <div class="section-title">Smart bone chains <button class="mini" id="newSmartGroup">+ Group</button></div>
+        <div id="smartGroups" class="list-box"></div>
+        <label class="control-label">Follow strength <input id="smartStrength" type="range" min="0" max="100" value="68"></label>
+        <label class="control-label">Damping <input id="smartDamping" type="range" min="0" max="100" value="42"></label>
+        <label class="control-label">Inertia <input id="smartInertia" type="range" min="0" max="100" value="35"></label>
+        <p class="hint">Smart chains add delayed follow-through to each bone in sequence. Assign bones to groups in the list.</p>
+        <div class="divider"></div>
         <label class="check-row"><input type="checkbox" id="showBones" checked> Show bones</label>
         <label class="check-row"><input type="checkbox" id="showMask" checked> Show mask outline</label>
       </div>
@@ -129,7 +142,7 @@
   <section class="timeline panel">
     <div class="timeline-head">
       <div><b>Timeline</b><span class="muted"> / Animation</span></div>
-      <div class="timeline-tools"><button class="mini" id="addKey">Add keyframe</button><button class="mini" id="addTrack">Tracks</button><label>Duration <input id="durationInput" type="number" value="120" min="12" max="1200"> f</label></div>
+      <div class="timeline-tools"><button class="mini" id="addKey">Add key</button><button class="mini" id="copyKey">Copy</button><button class="mini" id="pasteKey">Paste</button><button class="mini" id="deleteKey">Delete</button><label>Duration <input id="durationInput" type="number" value="120" min="12" max="1200"> f</label></div>
     </div>
     <div class="timeline-body">
       <div class="track-labels">
@@ -149,7 +162,7 @@
         <input id="frameScrubber" type="range" min="0" max="120" value="0" aria-label="Current frame">
       </div>
     </div>
-    <div class="timeline-foot"><span id="frameLabel">Frame 0</span><span>Pose keys store transforms and every bone joint position</span><span id="keyCount">0 keyframes</span></div>
+    <div class="timeline-foot"><span id="frameLabel">Frame 0</span><span>Drag diamonds to retime · Ctrl/Cmd+C copy · Ctrl/Cmd+V paste</span><span id="keyCount">0 keyframes</span></div>
   </section>
 
   <div class="toast" id="toast" role="status"></div>
