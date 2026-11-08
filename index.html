@@ -37,7 +37,7 @@
       </div>
       <div class="section">
         <div class="section-title">Artwork <button class="mini" id="addImageBtn">Import</button></div>
-        <input id="imageInput" type="file" accept="image/*" hidden>
+        <input id="imageInput" type="file" accept="image/*" multiple hidden>
         <div class="asset-card hidden" id="assetCard">
           <div class="asset-thumb"><span>IMG</span></div>
           <div><b id="assetName">No artwork</b><small>Image layer</small></div>
@@ -46,8 +46,7 @@
       </div>
       <div class="section">
         <div class="section-title">Layers <button class="mini" id="addLayerBtn">Add layer</button></div>
-        <div class="layer-row selected"><span class="layer-icon">Image</span><span>Character</span></div>
-        <div class="layer-row"><span class="layer-icon">Rig</span><span>Bones</span></div>
+        <div id="layerList" class="layer-list"><p class="hint">No artwork yet.</p></div>
       </div>
       <div class="left-footer"><span class="online-dot"></span> All changes are local</div>
     </aside>
@@ -56,9 +55,15 @@
       <div class="canvas-toolbar">
         <div class="tool-context"><b id="activeToolName">Select tool</b><span id="toolHint">Select and move objects on the canvas</span></div>
         <div class="canvas-actions">
+          <button class="icon-btn" id="modeSelect" title="Select tool">↖</button>
+          <button class="icon-btn" id="modeMove" title="Move tool">✥</button>
+          <button class="icon-btn" id="modeHand" title="Pan tool">✋</button>
+          <span class="toolbar-divider"></span>
+          <button class="icon-btn" id="zoomIn" title="Zoom in">⊕</button>
+          <button class="zoom-label" id="zoomBtn">70%</button>
+          <button class="icon-btn" id="zoomOut" title="Zoom out">⊖</button>
           <button class="icon-btn" id="fitBtn" title="Fit canvas">⌗</button>
           <button class="icon-btn" id="gridBtn" title="Toggle grid">▦</button>
-          <button class="zoom-label" id="zoomBtn">100%</button>
         </div>
       </div>
       <div class="stage-wrap" id="stageWrap">
@@ -70,7 +75,7 @@
           <h1>Start with your artwork</h1>
           <p class="welcome-copy">Import an image and bring it to life with motion, keyframes and a custom rig.</p>
           <button class="welcome-button" id="welcomeImport">Choose an image <span>↗</span></button>
-          <span class="file-note">PNG, JPG or WebP · Your files stay on this device</span>
+          <span class="file-note">PNG, JPG or WebP · Import multiple images · Each layer has its own rig and mask</span>
         </div>
         <div class="stage-corner">900 × 560</div>
       </div>
@@ -87,7 +92,7 @@
     </section>
 
     <aside class="right-panel panel">
-      <div class="right-tabs"><button class="tab active" data-tab="properties">Properties</button><button class="tab" data-tab="rig">Rig</button><button class="tab" data-tab="effects">Effects</button></div>
+      <div class="right-tabs"><button class="tab active" data-tab="properties">Properties</button><button class="tab" data-tab="rig">Rig</button></div>
       <div id="propertiesTab" class="tab-content">
         <div class="section-title">Transform <span class="muted">SELECTED LAYER</span></div>
         <div class="property-grid">
@@ -95,14 +100,14 @@
           <label>Scale X <input id="scaleX" type="number" value="100"></label><label>Scale Y <input id="scaleY" type="number" value="100"></label>
           <label>Rotation <input id="rotation" type="number" value="0"></label><label>Opacity <input id="opacity" type="number" value="100" min="0" max="100"></label>
         </div>
-        <button class="outline full" id="keyTransform">Add transform keyframe</button>
+        <button class="outline full" id="keyTransform">Add pose keyframe</button>
         <div class="divider"></div>
         <div class="section-title">Anchor point</div>
         <div class="property-grid"><label>Anchor X <input id="anchorX" type="number" value="0"></label><label>Anchor Y <input id="anchorY" type="number" value="0"></label></div>
         <p class="hint">Choose Anchor tool, then click on the artwork to move its pivot.</p>
         <div class="divider"></div>
         <div class="section-title">Mask</div>
-        <p class="hint">Click around an object to create a closed polygon. Double-click or press Enter to close it.</p>
+        <p class="hint">Click around the selected image to create a clipping mask. Press Enter or Close mask to apply. Each image has its own independent mask.</p>
         <div class="button-row"><button class="outline" id="closeMask">Close mask</button><button class="outline" id="clearMask">Clear</button></div>
         <div class="divider"></div>
         <div class="section-title">Interpolation</div>
@@ -111,31 +116,14 @@
 
       <div id="rigTab" class="tab-content hidden">
         <div class="section-title">Skeleton <button class="mini" id="clearBones">Clear</button></div>
-        <p class="hint">Choose Bone, click a start point and an end point. Connect bones by starting at an existing joint.</p>
+        <p class="hint">Choose Bone, click a start point and an end point. Start on an existing joint to connect segments. Drag any joint with Select to deform the image mesh. Add a pose keyframe to animate the rig.</p>
         <div id="boneList" class="list-box"><div class="empty-state">No bones yet. Create your first bone on the canvas.</div></div>
         <div class="divider"></div>
-        <div class="section-title">Bone chains</div>
-        <label class="stack-label">Selected chain <select id="chainSelect" class="wide-select"><option value="">No chain</option></select></label>
-        <label class="stack-label">Follow-through <input id="follow" type="range" min="0" max="100" value="55"><small id="followVal">55%</small></label>
-        <label class="stack-label">Motion speed <input id="chainSpeed" type="range" min="10" max="200" value="100"><small id="speedVal">1.00×</small></label>
-        <label class="stack-label">Duration <input id="chainDuration" type="range" min="5" max="100" value="40"><small id="durationVal">40 frames</small></label>
-        <button class="outline full" id="makeChain">Create sequential chain</button>
-        <p class="hint">Sequential chains are useful for tails, hair, fabric and linked accessories.</p>
-      </div>
-
-      <div id="effectsTab" class="tab-content hidden">
-        <div class="section-title">Turbulence</div>
-        <label class="stack-label">Amount <input id="turbAmount" type="range" min="0" max="40" value="0"><small id="turbVal">0</small></label>
-        <label class="stack-label">Size <input id="turbSize" type="range" min="8" max="160" value="55"><small id="turbSizeVal">55</small></label>
-        <label class="stack-label">Speed <input id="turbSpeed" type="range" min="0" max="100" value="35"><small id="turbSpeedVal">35</small></label>
-        <button class="outline full" id="keyEffect">Add effect keyframe</button>
-        <div class="divider"></div>
-        <div class="section-title">Viewport</div>
-        <p class="hint">Turbulence is previewed as a live canvas displacement effect. Animate its amount with effect keyframes.</p>
         <label class="check-row"><input type="checkbox" id="showBones" checked> Show bones</label>
         <label class="check-row"><input type="checkbox" id="showMask" checked> Show mask outline</label>
       </div>
-    </aside>
+
+   </aside>
   </main>
 
   <section class="timeline panel">
@@ -161,13 +149,13 @@
         <input id="frameScrubber" type="range" min="0" max="120" value="0" aria-label="Current frame">
       </div>
     </div>
-    <div class="timeline-foot"><span id="frameLabel">Frame 0</span><span>Drag the playhead or click the ruler to scrub</span><span id="keyCount">0 keyframes</span></div>
+    <div class="timeline-foot"><span id="frameLabel">Frame 0</span><span>Pose keys store transforms and every bone joint position</span><span id="keyCount">0 keyframes</span></div>
   </section>
 
   <div class="toast" id="toast" role="status"></div>
   <div class="export-menu hidden" id="exportMenu">
     <b>Export animation</b>
-    <button data-export="gif">GIF animation <small>Animated image</small></button>
+    
     <button data-export="sprite">Sprite sheet <small>PNG grid</small></button>
     <button data-export="webm">WebM video <small>Alpha transparency where supported</small></button>
     <button data-export="mp4">MP4 video <small>Browser-supported recording</small></button>
